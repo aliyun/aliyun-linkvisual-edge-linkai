@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2018/12/26 下午9:54
+# @Author  : jhon.zh
+# @File    : base.py
+
+from .iotx_codes import IoTxCode, IoTxCodes
+import json
+
+
+class BaseRequest(object):
+    """ 基础请求
+    """
+
+    def dict2obj(self, dct, obj_tag):
+        """
+        字典表转换对象
+        """
+        for key, value in dct.items():
+            if isinstance(value, dict):
+                sub_obj = getattr(obj_tag, key)
+                sub_dct = dct[key]
+                if sub_dct is not None:
+                    self.dict2obj(sub_dct, sub_obj)
+                else:
+                    setattr(obj_tag, key, None)
+            elif isinstance(value, list):
+                list_obj = list()
+                for idx, item in enumerate(value):
+                    if item is not None:
+                        list_obj.append(item)
+                setattr(obj_tag, key, list_obj)
+            else:
+                setattr(obj_tag, key, value)
+        return obj_tag
+
+    def init_from_json(self, json_str):
+        try:
+            ret = json.loads(json_str)
+            self.dict2obj(ret, self)
+        except Exception as e:
+            print(e)
+        return self
+
+
+class BaseResponse(object):
+    """ 基础回复
+    """
+
+    def __init__(self, iotx_code: 'IoTxCode' = IoTxCodes.SUCCESS):
+        self.message = iotx_code.message
+        self.result = iotx_code.code
+
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__)

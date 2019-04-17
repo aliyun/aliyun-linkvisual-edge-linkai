@@ -1,0 +1,352 @@
+{
+  "schema": "https://iotx-tsl.oss-ap-southeast-1.aliyuncs.com/schema.json",
+  "profile": {
+    "productKey": ""
+  },
+  "services": [
+    {
+      "outputData": [],
+      "identifier": "set",
+      "inputData": [],
+      "method": "thing.service.property.set",
+      "name": "set",
+      "required": true,
+      "callType": "async",
+      "desc": "属性设置"
+    },
+    {
+      "outputData": [
+        {
+          "identifier": "UploadPlatform",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "上报平台属性"
+        },
+        {
+          "identifier": "AlgorithmModelList",
+          "dataType": {
+            "specs": {
+              "length": "2048"
+            },
+            "type": "text"
+          },
+          "name": "模型文件列表"
+        }
+      ],
+      "identifier": "get",
+      "inputData": [
+        "UploadPlatform",
+        "AlgorithmModelList"
+      ],
+      "method": "thing.service.property.get",
+      "name": "get",
+      "required": true,
+      "callType": "async",
+      "desc": "属性获取"
+    },
+    {
+      "outputData": [],
+      "identifier": "AddAlgorithmModel",
+      "inputData": [
+        {
+          "identifier": "AlgoURL",
+          "dataType": {
+            "specs": {
+              "length": "2048"
+            },
+            "type": "text"
+          },
+          "name": "算法模型下载URL"
+        },
+        {
+          "identifier": "AlgoID",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "算法模型ID"
+        }
+      ],
+      "method": "thing.service.AddAlgorithmModel",
+      "name": "增加算法模型",
+      "required": false,
+      "callType": "async"
+    },
+    {
+      "outputData": [],
+      "identifier": "DeleteAlgorithmModel",
+      "inputData": [
+        {
+          "identifier": "AlgoID",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "算法模型ID"
+        }
+      ],
+      "method": "thing.service.DeleteAlgorithmModel",
+      "name": "删除算法模型",
+      "required": false,
+      "callType": "async"
+    },
+    {
+      "outputData": [],
+      "identifier": "StartAlgorithmTask",
+      "inputData": [
+        {
+          "identifier": "VideoURL",
+          "dataType": {
+            "specs": {
+              "length": "2048"
+            },
+            "type": "text"
+          },
+          "name": "视频源URL"
+        },
+        {
+          "identifier": "TaskID",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "算法任务号"
+        },
+        {
+          "identifier": "AlgoID",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "算法模型ID"
+        }
+      ],
+      "method": "thing.service.StartAlgorithmTask",
+      "name": "启动算法任务",
+      "required": false,
+      "callType": "async"
+    },
+    {
+      "outputData": [],
+      "identifier": "StopAlgorithmTask",
+      "inputData": [
+        {
+          "identifier": "TaskID",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "算法任务号"
+        }
+      ],
+      "method": "thing.service.StopAlgorithmTask",
+      "name": "停止算法任务",
+      "required": false,
+      "callType": "async"
+    }
+  ],
+  "properties": [
+    {
+      "identifier": "UploadPlatform",
+      "dataType": {
+        "specs": {
+          "length": "255"
+        },
+        "type": "text"
+      },
+      "name": "上报平台属性",
+      "accessMode": "r",
+      "required": true
+    },
+    {
+      "identifier": "AlgorithmModelList",
+      "dataType": {
+        "specs": {
+          "length": "2048"
+        },
+        "type": "text"
+      },
+      "name": "模型文件列表",
+      "accessMode": "r",
+      "required": false,
+      "desc": "返回Json字符串(如：[\"算法名1\", \"算法名2\"])"
+    }
+  ],
+  "events": [
+    {
+      "outputData": [
+        {
+          "identifier": "UploadPlatform",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "上报平台属性"
+        },
+        {
+          "identifier": "AlgorithmModelList",
+          "dataType": {
+            "specs": {
+              "length": "2048"
+            },
+            "type": "text"
+          },
+          "name": "模型文件列表"
+        }
+      ],
+      "identifier": "post",
+      "method": "thing.event.property.post",
+      "name": "post",
+      "type": "info",
+      "required": true,
+      "desc": "属性上报"
+    },
+    {
+      "outputData": [
+        {
+          "identifier": "AlgoID",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "算法模型ID"
+        },
+        {
+          "identifier": "Result",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "结果"
+        },
+        {
+          "identifier": "DeployType",
+          "dataType": {
+            "specs": {
+              "0": "删除算法模型",
+              "1": "增加算法模型"
+            },
+            "type": "enum"
+          },
+          "name": "部署类型"
+        }
+      ],
+      "identifier": "AlgorithmModelDeployResult",
+      "method": "thing.event.AlgorithmModelDeployResult.post",
+      "name": "算法模型部署结果",
+      "type": "info",
+      "required": false,
+      "desc": "AddAlgorithmModel、DeleteAlgorithmModel消息后，需上报此事件"
+    },
+    {
+      "outputData": [
+        {
+          "identifier": "AlgoID",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "算法模型ID"
+        },
+        {
+          "identifier": "TaskID",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "算法任务号"
+        },
+        {
+          "identifier": "Result",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "执行结果"
+        },
+        {
+          "identifier": "TaskType",
+          "dataType": {
+            "specs": {
+              "0": "停止算法",
+              "1": "启动算法"
+            },
+            "type": "enum"
+          },
+          "name": "任务类型"
+        }
+      ],
+      "identifier": "AlgorithmTaskResult",
+      "method": "thing.event.AlgorithmTaskResult.post",
+      "name": "算法任务执行结果",
+      "type": "info",
+      "required": false,
+      "desc": "StartAlgorithmTask、StopAlgorithmTask后上报此事件。"
+    },
+    {
+      "outputData": [
+        {
+          "identifier": "Result",
+          "dataType": {
+            "specs": {
+              "length": "2048"
+            },
+            "type": "text"
+          },
+          "name": "推理结果"
+        },
+        {
+          "identifier": "PicURL",
+          "dataType": {
+            "specs": {
+              "length": "2048"
+            },
+            "type": "text"
+          },
+          "name": "图片URL"
+        },
+        {
+          "identifier": "TaskID",
+          "dataType": {
+            "specs": {
+              "length": "255"
+            },
+            "type": "text"
+          },
+          "name": "任务号"
+        }
+      ],
+      "identifier": "InferenceResult",
+      "method": "thing.event.InferenceResult.post",
+      "name": "推理结果",
+      "type": "info",
+      "required": false
+    }
+  ]
+}
