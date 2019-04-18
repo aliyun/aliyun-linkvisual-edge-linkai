@@ -9,48 +9,36 @@
 # 安装环境、启动命令等
 2.1 环境准备和运行
 
-创建venv环境  
+2.1.1 创建venv环境  
 pip3 install virtualenv    
 virtualenv --no-site-packages venv  
 source venv/bin/activate 
 
-安装依赖库   
+2.1.2 安装依赖库   
 pip3 install -r requirements.txt -i  https://mirrors.aliyun.com/pypi/simple/ 
 
-指定连接云端设备三元组信息  
+2.1.3 指定连接云端设备三元组信息  
 在根目录下的Default.cfg中填入  
 product_key =  
 device_name =  
 device_secret =
 
-创建算法模型目录和logs目录  
+2.1.4 创建算法模型目录和logs目录  
 mkdir algomodule  
 mkdir logs  
 
-打包  
+2.1.5 打包  
 python3 setup.py develop
 
-当上述命令执行成功后，在当前目录下执行：  
+2.1.6 程序执行  
 linkai -l
 
-运行目录如下：  
-需要包含配置文件和模块目录  
-```
-.
-├── Default.cfg
-└── algomodule
-    └─── humandetect
-        ├── frozen_inference_graph.pb
-        └── model.py
-```
+# 视频推理
+2.2 边缘智能视频分析  
+当程序运行后，需要使用阿里云智能视频服务下发算法模型到algomodule目录下  
+并使用阿里云的相关的云端服务开启和停止算法任务，详情请参见阿里云官网的LinkVisual服务
 
-
-
-
-
-
-
-# 代码目录结构说明，更详细点可以说明软件的基本原理
+# 代码目录结构说明
 ```
 .
 ├── linkai
@@ -65,8 +53,12 @@ linkai -l
     ├── service         API接口
     ├── task            任务
     └── utils           工具模块
-
+├── Default.cfg         默认配置文件
+├── README.md           readme文件
+├── log.conf            log信息文件
+├── model.json          物模型文件
+├── requirements.txt    程序运行的依赖库文件
+└── setup.py            打包setup文件
 ```
-
 
 # 常见问题说明
