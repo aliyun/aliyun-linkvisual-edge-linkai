@@ -41,6 +41,7 @@ class CommonTask(Task):
     def __init__(self, task_param: "TaskParamTO"):
         super(CommonTask, self).__init__(task_param)
         # 算法处理RGBA
+        self.mq_last_time = datetime.datetime.now()
         self.image_info = None
         self.process_image_flag = False
         self.process_image_exit_flag = False

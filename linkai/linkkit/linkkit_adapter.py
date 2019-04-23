@@ -17,54 +17,17 @@
 #
 
 import queue
-import shutil
 import threading
 import time
 
 import linkai.linkkit.linkkit as linkkit
 from linkai import conf
 import os
-import urllib
-import zipfile
+
 import logging as log
-from concurrent.futures import ThreadPoolExecutor
 
-from linkai.algo_oam.algo_event import AlgorithmModelDeployResultEvent, AlgorithmEventErrorCodes, \
-    AlgorithmDeployEventType, AlgorithmTaskResultEvent, AlgorithmTaskEventType
+
 from linkai.algo_oam.algo_oam import thing_call_service, query_algo_model_list
-from linkai.utils.tools import json_post
-
-executor = ThreadPoolExecutor(max_workers = 1)
-host_name = conf.get_string("LinkKit", "host_name")
-if "PRODUCT_KEY" in os.environ:
-    product_key = os.environ["PRODUCT_KEY"]
-else:
-    product_key = conf.get_string("LinkKit", "product_key")
-log.info("product_key={}".format(product_key))
-
-if "DEVICE_NAME" in os.environ:
-    device_name = os.environ["DEVICE_NAME"]
-else:
-    device_name = conf.get_string("LinkKit", "device_name")
-log.info("device_name={}".format(device_name))
-
-if "DEVICE_SECRET" in os.environ:
-    device_secret = os.environ["DEVICE_SECRET"]
-else:
-    device_secret = conf.get_string("LinkKit", "device_secret")
-log.info("device_secret={}".format(device_secret))
-
-platform = conf.get_string("LinkKit", "platform")
-lk = linkkit.LinkKit(host_name, product_key, device_name, device_secret)
-lk.enable_logger(0)
-lk.thing_setup("model.json")
-"""算法模型列表"""
-list_algo_id = []
-"""云端的taskid和算法算法的algoid的映射字典"""
-dict_cloud_task_id_algo_id = {}
-"""云端的taskid和算法启动分配的taskid的映射字典"""
-dict_cloud_taskid_algo_taskid = {}
-service_queue = queue.Queue(10)
 
 
 class ServiceMsg(object):
@@ -97,7 +60,7 @@ def run():
 
             else:
                 time.sleep(0.1)
-
+        time.sleep(0.1)
 
 def on_connect(session_flag, rc, userdata):
     print("on_connect:%d,rc:%d,userdata:" % (session_flag, rc))
@@ -234,11 +197,45 @@ def on_thing_event_post(event, request_id, code, data, reply_message, user_data)
                                                                                                       reply_message))
 
 
-lk.on_connect = on_connect
-lk.on_disconnect = on_disconnect
-lk.on_thing_call_service = on_thing_call_service
-lk.on_thing_enable = on_thing_enable
-lk.on_thing_prop_post = on_thing_prop_post
-lk.on_thing_event_post = on_thing_event_post
-lk.connect_async()
-threading.Thread(target=run, args=()).start()
+if "LINKKIT_LOADED" not in os.environ:
+    os.environ.setdefault("LINKKIT_LOADED", "TRUE")
+    host_name = conf.get_string("LinkKit", "host_name")
+    if "PRODUCT_KEY" in os.environ:
+        product_key = os.environ["PRODUCT_KEY"]
+    else:
+        product_key = conf.get_string("LinkKit", "product_key")
+    log.info("product_key={}".format(product_key))
+
+    if "DEVICE_NAME" in os.environ:
+        device_name = os.environ["DEVICE_NAME"]
+    else:
+        device_name = conf.get_string("LinkKit", "device_name")
+    log.info("device_name={}".format(device_name))
+
+    if "DEVICE_SECRET" in os.environ:
+        device_secret = os.environ["DEVICE_SECRET"]
+    else:
+        device_secret = conf.get_string("LinkKit", "device_secret")
+    log.info("device_secret={}".format(device_secret))
+
+    platform = conf.get_string("LinkKit", "platform")
+    lk = linkkit.LinkKit(host_name, product_key, device_name, device_secret)
+    lk.enable_logger(0)
+    lk.thing_setup("model.json")
+    """算法模型列表"""
+    list_algo_id = []
+    """云端的taskid和算法算法的algoid的映射字典"""
+    dict_cloud_task_id_algo_id = {}
+    """云端的taskid和算法启动分配的taskid的映射字典"""
+    dict_cloud_taskid_algo_taskid = {}
+    service_queue = queue.Queue(10)
+
+    lk.on_connect = on_connect
+    lk.on_disconnect = on_disconnect
+    lk.on_thing_call_service = on_thing_call_service
+    lk.on_thing_enable = on_thing_enable
+    lk.on_thing_prop_post = on_thing_prop_post
+    lk.on_thing_event_post = on_thing_event_post
+    lk.connect_async()
+    threading.Thread(target=run, args=()).start()
+
