@@ -23,8 +23,7 @@ product_key =
 device_name =  
 device_secret =
 
-2.1.4 创建算法模型目录和logs目录  
-mkdir algomodule  
+2.1.4 创建logs目录  
 mkdir logs  
 
 2.1.5 打包  
@@ -41,24 +40,26 @@ linkai -l
 # 代码目录结构说明
 ```
 .
+├── algomodule    
+    ├── age_gender_recognition  算法模型示例
 ├── linkai
-    ├── algo_result.py  算法类型定义模块
-    ├── algostore.py    算法加载模块
-    ├── conf.py         配置读取模块
-    ├── main.py         代码执行入口
-    ├── algo_oam        算法模型增删改查模块
-    ├── linkkit         连接阿里云模块
-    ├── media           流媒体接入模块
-    ├── oss             录像存储
-    ├── service         API接口
-    ├── task            任务
-    └── utils           工具模块
-├── Default.cfg         默认配置文件
-├── README.md           readme文件
-├── log.conf            log信息文件
-├── model.json          物模型文件
-├── requirements.txt    程序运行的依赖库文件
-└── setup.py            打包setup文件
+    ├── algo_result.py          算法类型定义模块
+    ├── algostore.py            算法加载模块
+    ├── conf.py                 配置读取模块
+    ├── main.py                 代码执行入口
+    ├── algo_oam                算法模型增删改查模块
+    ├── linkkit                 连接阿里云套件模块
+    ├── media                   流媒体接入模块
+    ├── oss                     对象存储服务模块
+    ├── service                 API接口
+    ├── task                    任务模块
+    └── utils                   工具模块
+├── Default.cfg                 默认配置文件
+├── README.md                   readme文件
+├── log.conf                    log信息文件
+├── model.json                  物模型文件
+├── requirements.txt            程序运行的依赖库文件
+└── setup.py                    打包setup文件
 ```
 
 # 常见问题说明

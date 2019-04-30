@@ -62,6 +62,7 @@ def run():
                 time.sleep(0.1)
         time.sleep(0.1)
 
+
 def on_connect(session_flag, rc, userdata):
     print("on_connect:%d,rc:%d,userdata:" % (session_flag, rc))
     pass

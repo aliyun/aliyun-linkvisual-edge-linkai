@@ -18,6 +18,7 @@
 #
 
 import datetime, threading, logging, time
+import os
 from collections import deque
 from ffmpy import FFmpeg
 from linkai.algostore import algo_manager
@@ -114,10 +115,12 @@ class CommonTask(Task):
                                                time.strftime("%Y-%m-%d_%H:%M:%S",
                                                              time.localtime(time.time())))
             tools.compress_buf_to_jpg(format_type, width, height, array, PIC_PATH + pic_filename)
-            # 定制，图片直接上传云端
-            oss_client.put_object_from_file(pic_filename, PIC_PATH + pic_filename)
-            oss_file_url = oss_client.generate_signed_url(pic_filename, 24*3600)
-            capture_time = time.mktime(datetime.datetime.now().timetuple())
-            self.msg_call_back(pic_filename, capture_time, result, oss_file_url)
+
+            if "LINK_KIT" in os.environ:
+                # 定制，图片直接上传云端
+                oss_client.put_object_from_file(pic_filename, PIC_PATH + pic_filename)
+                oss_file_url = oss_client.generate_signed_url(pic_filename, 24*3600)
+                capture_time = time.mktime(datetime.datetime.now().timetuple())
+                self.msg_call_back(pic_filename, capture_time, result, oss_file_url)
 
 

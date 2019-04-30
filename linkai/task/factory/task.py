@@ -60,20 +60,10 @@ class Task(object):
         self.http_post_origin_pic_flag = conf.get_int("Default", "http_post_origin_pic_flag")
         # 获取http post 方式： 1：一个request一张图片，其他值一个request多张图片
         self.http_post_method_flag = conf.get_int("Default", "http_post_method_flag")
-        self.event_queue = queue.Queue(100)
-        self.event_thread = threading.Thread(target=Task.run, args=(self,))
 
     def __del__(self):
         pass
 
-    def run(self):
-        """任务线程,每次取出队列中的一个任务进行执行"""
-        while True:
-            if not self.event_queue.empty():
-                event = self.event_queue.get()
-                on_thing_post_algo_result_event(event)
-            else:
-                time.sleep(0.1)
 
     def start(self):
         self.video_thread.start()
