@@ -17,13 +17,11 @@
 #
 #
 
-import datetime, threading, time, numpy, cv2
+import threading, time, numpy
 import logging
-import queue
 
 from linkai import conf
 from linkai.algo_result import *
-from linkai.linkkit.linkkit_adapter import on_thing_post_algo_result_event
 
 from ..model.algorithm_event import AlgorithmEvent
 from ..model.task_param import TaskStatus, TaskParamTO
@@ -63,7 +61,6 @@ class Task(object):
 
     def __del__(self):
         pass
-
 
     def start(self):
         self.video_thread.start()
