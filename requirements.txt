@@ -29,7 +29,7 @@ paho-mqtt==1.4.0
 pika==0.12.0
 Pillow==5.3.0
 protobuf==3.6.1
-psutil==5.4.8
+psutil==5.6.6
 pycairo==1.17.1
 pycryptodome==3.7.0
 PyGObject==3.30.1

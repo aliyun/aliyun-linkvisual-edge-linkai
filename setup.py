@@ -26,7 +26,7 @@ setup(
         'Pillow==5.3.0',
         'oss2==2.6.0',
         'redis==3.0.1',
-        'psutil==5.4.8',
+        'psutil==5.6.6',
         'pika==0.12.0',
         'opencv-python==3.4.3.18',
         'ffmpy==0.2.2',
