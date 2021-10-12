@@ -28,7 +28,7 @@ setup(
         'redis==3.0.1',
         'psutil==5.4.8',
         'pika==0.12.0',
-        'opencv-python==3.4.3.18',
+        'opencv-python==4.2.0.32',
         'ffmpy==0.2.2',
         'paho-mqtt==1.4.0',
     ],

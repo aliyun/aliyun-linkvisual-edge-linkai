@@ -23,7 +23,7 @@ Markdown==3.0.1
 MarkupSafe==1.0
 mutagen==1.41.1
 numpy==1.15.2
-opencv-python==3.4.3.18
+opencv-python==4.2.0.32
 oss2==2.6.0
 paho-mqtt==1.4.0
 pika==0.12.0
