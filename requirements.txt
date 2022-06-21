@@ -22,7 +22,7 @@ Keras-Preprocessing==1.0.5
 Markdown==3.0.1
 MarkupSafe==1.0
 mutagen==1.41.1
-numpy==1.15.2
+numpy==1.22.0
 opencv-python==3.4.3.18
 oss2==2.6.0
 paho-mqtt==1.4.0
