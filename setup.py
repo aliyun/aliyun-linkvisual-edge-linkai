@@ -20,7 +20,7 @@ setup(
     # 这里添加依赖项
     install_requires=[
         'PyGObject==3.30.1',  # GSTREAMER 依赖库
-        'numpy==1.15.2',
+        'numpy==1.22.0',
         'Flask==1.0.2',  # 网络框架
         'tensorflow==1.11.0',  # 算法框架
         'Pillow==5.3.0',
