@@ -22,7 +22,7 @@ setup(
         'PyGObject==3.30.1',  # GSTREAMER 依赖库
         'numpy==1.15.2',
         'Flask==1.0.2',  # 网络框架
-        'tensorflow==1.11.0',  # 算法框架
+        'tensorflow==2.9.3',  # 算法框架
         'Pillow==5.3.0',
         'oss2==2.6.0',
         'redis==3.0.1',
